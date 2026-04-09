@@ -40,8 +40,37 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3,
 
 modelo = KNN()
 modelo.fit(X_train, y_train)
-modelo.predict(X_test)
+y_pred = modelo.predict(X_test)
 
+print("Dados previstos: ", y_pred)
+print("Dados reais: ", y_test)
+
+y_true = [1,0,1,1,0]
+y_pred = [1,0,0,1,0]
+
+VP = 2
+VN = 2
+FP = 1
+FN = 0
+
+def acuracia(vp, fp, fn, vn):
+    return (vp+vn) / (vp+fp+fn+vn)
+
+def precisao(vp, fp, fn, vn):
+    return vp/ (vp+fp)
+
+def recall(vp, fp, fn, vn):
+    return vp/(vp+fn)
+
+def f_score(vp, fp, fn, vn):
+    p = precisao(vp, fp, fn, vn)
+    r = recall(vp, fp, fn, vn)
+    return 2*p* r/(p+r)
+
+print("Acuracia: ", acuracia(VP, FP, FN, VN))
+print("Precisão: ", precisao(VP, FP, FN, VN))
+print("Recall: ", recall(VP, FP, FN, VN))
+print("F_Score: ", f_score(VP, FP, FN, VN))
 
 
 
