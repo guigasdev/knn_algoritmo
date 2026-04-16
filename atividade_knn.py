@@ -100,13 +100,15 @@ precisoes = []
 for c in classes:
     vp = 0
     fp = 0
-    for i in range(len(y_test)):
-        if y_pred[i] == c:
-            vp +1
-        else:
-            fp += 1
+    for yt, yp in zip(y_test, y_pred):
+        if yp == c:
+            if yt == c:
+                vp +=1
+            else:
+                fp += 1
             
     precisao = vp / (vp+fp)
     precisoes.append(precisao)
     
 macro_precision = sum(precisoes) / len(precisoes)
+print("A macro precision é: ", macro_precision)
